@@ -1,5 +1,5 @@
-#ifndef MONTYH
-#define MONTYH
+#ifndef MONTY_H
+#define MONTY_H
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -39,8 +39,8 @@ typedef struct instruction_s
 /* functions list*/
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
-void pint(stack **stack, unsigned int line_number);
-void pop(stack **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 
 #endif

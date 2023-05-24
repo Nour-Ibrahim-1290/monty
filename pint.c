@@ -22,7 +22,7 @@ void pint(stack_t **stack, unsigned int line_number)
 		printf("L%d: can't pint, stack empty\n", line_number);
 		error_exit(stack);
 	}
-	printf("%d\n", runner->n);
+	printf("%d\n", loop->n);
 }
 
 
