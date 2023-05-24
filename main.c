@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 	instruction_t instructions[] = {
 		{"push", push},
 		{"pall", pall},
+		{"pop", pop}, {"swap", swap}, {"pint", pint}
 		{NULL, NULL}
 	};
 
