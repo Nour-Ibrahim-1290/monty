@@ -18,7 +18,6 @@ void pall(stack_t **stack, __attribute__ ((unused))unsigned int line_number)
 	while (count != NULL)
 	{
 		printf("%d\n", count->n);
-
 		count = count->next;
 	}
 }
