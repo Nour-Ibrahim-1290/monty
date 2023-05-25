@@ -30,14 +30,14 @@ int main(int argc, char *argv[])
 	/*Check if the user provided a file name*/
 	check(argc, argv, file);
 
-	while (getline(&line, &line_length, file) != -1)
+	while (getline(&line, &line_length, file) != -1 && !feof(file))
 	{/* Read the bytecodes from the file*/
 		opcode = strtok(line, " \n");
 		for (i = 0; instructions[i].opcode != NULL; i++)
 		{
 			if (strcmp(opcode, instructions[i].opcode) == 0)
 			{
-				instructions[i].f(&stack, line_number);
+				instructions[i].f(stack, line_number);
 				break;
 			}
 		}
@@ -99,7 +99,7 @@ void execute(char *opcode, stack_t *stack, unsigned int line_number)
 
 	for (i = 0; instructions[i].opcode != NULL; i++)
 	{
-		if (strcmp(opcode, instructions[i].opcode) == 0)
+		if (strcmp(opcode, instructions[i].opcode) == NULL)
 		{
 			instructions[i].f(&stack, line_number);
 			break;
