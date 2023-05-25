@@ -1,6 +1,8 @@
 #include "monty.h"
 
 
+void execute(char *opcode, stack_t *stack, unsigned int line_number);
+void check(int argc, char *argv[], FILE *file);
 /**
  * main - check point
  * Description: read monty file and execute the opcodes
@@ -13,13 +15,11 @@
 int main(int argc, char *argv[])
 {
 	FILE *file = fopen(argv[1], "r");
-	stack_t *stack = malloc(sizeof(stack_t));
+	stack_t *stack = NULL;
 	char *line = NULL, *opcode = NULL;
 	size_t line_length = 0;
 	unsigned int line_number = 1;
 	int i;
-
-	/* Create an instruction table */
 	instruction_t instructions[] = {
 		{"push", push},
 		{"pall", pall},
@@ -27,39 +27,12 @@ int main(int argc, char *argv[])
 		{NULL, NULL}
 	};
 
-	/* Check if the user has provided a file name */
-	if (argc != 2)
-	{
-		fprintf(stderr, "Usage: monty file\n");
-		exit(EXIT_FAILURE);
-	}
+	/*Check if the user provided a file name*/
+	check(argc, argv, file);
 
-	/* Open the file */
-	if (file == NULL)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
-
-	/* Create a stack */
-	if (stack == NULL)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-
-	/* Initialize the stack ???? do i really i need it?*/
-	stack->n = 0;
-	stack->prev = NULL;
-	stack->next = NULL;
-
-	/* Read the bytecodes from the file */
 	while (getline(&line, &line_length, file) != -1)
-	{
-		/* Parse the bytecode */
+	{/* Read the bytecodes from the file*/
 		opcode = strtok(line, " \n");
-
-		/* Execute the opcode */
 		for (i = 0; instructions[i].opcode != NULL; i++)
 		{
 			if (strcmp(opcode, instructions[i].opcode) == 0)
@@ -68,7 +41,6 @@ int main(int argc, char *argv[])
 				break;
 			}
 		}
-
 		if (instructions[i].opcode == NULL)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
@@ -76,12 +48,66 @@ int main(int argc, char *argv[])
 		}
 		line_number++;
 	}
-
-	/* Free the memory allocated for the line buffer */
-	free(line);
-
-	/* Close the file */
-	fclose(file);
-
+	free(line); /* Free the memory allocated for the line buffer */
+	fclose(file); /* Close the file */
 	return (0);
+}
+
+
+/**
+ * check - perform checks
+ * @argc: number of args in main
+ * @argv: array of args
+ * @file: monty file pointer, which we read opcodes from
+ *
+ * Return: void
+ */
+void check(int argc, char *argv[], FILE *file)
+{
+	if (argc != 2) /* Check if the user provided a file name */
+	{
+		fprintf(stderr, "Usage: monty file\n");
+		exit(EXIT_FAILURE);
+	}
+
+	if (file == NULL)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
+	}
+
+}
+
+/**
+ * execute - function to perform the loop (testing)
+ * @opcode: to perform
+ * @stack: to work in
+ * @line_number: in the monty file
+ *
+ * return: void
+ */
+
+void execute(char *opcode, stack_t *stack, unsigned int line_number)
+{
+	int i;
+	instruction_t instructions[] = {
+		{"push", push},
+		{"pall", pall},
+		{"pop", pop}, {"swap", swap}, {"pint", pint},
+		{NULL, NULL}
+	};
+
+	for (i = 0; instructions[i].opcode != NULL; i++)
+	{
+		if (strcmp(opcode, instructions[i].opcode) == 0)
+		{
+			instructions[i].f(&stack, line_number);
+			break;
+		}
+	}
+	if (instructions[i].opcode == NULL)
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
+		exit(EXIT_FAILURE);
+	}
 }
