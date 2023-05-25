@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	unsigned int line_number = 1;
 	int i;
 	instruction_t instructions[] = {
-		{"push", push},
+		{"push", push}, {"add", add},
 		{"pall", pall}, {"pop", pop}, {"nop", nop},
 		{"pop", pop}, {"swap", swap}, {"pint", pint},
 		{NULL, NULL}
