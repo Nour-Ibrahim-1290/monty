@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 		{"push", push}, {"add", add}, {"sub", sub},
 		{"pall", pall}, {"pop", pop}, {"nop", nop},
 		{"pop", pop}, {"swap", swap}, {"pint", pint},
-		{NULL, NULL}
+		{"mul", mul}, {NULL, NULL}
 	};
 
 	/*Check if the user provided a file name*/
