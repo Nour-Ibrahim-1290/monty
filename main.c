@@ -95,7 +95,7 @@ void execute(char *opcode, stack_t *stack, unsigned int line_number)
 		{"push", push}, {"pstr", pstr}, {"rotr", rotr},
 		{"pall", pall}, {"div", divide}, {"nop", nop},
 		{"pop", pop}, {"swap", swap}, {"pint", pint},
-		{"mul", mul}, {"sub", sub}, {"add", add},
+		{"mul", mul}, {"sub", sub}, {"add", add}, {"mod", mod},
 		{NULL, NULL}
 	};
 
