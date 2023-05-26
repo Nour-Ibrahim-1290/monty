@@ -3,6 +3,7 @@
 
 void execute(char *opcode, stack_t *stack, unsigned int line_number);
 void check(int argc, char *argv[], FILE *file);
+void free_stack(stack_t *head);
 /**
  * main - check point
  * Description: read monty file and execute the opcodes
@@ -59,10 +60,30 @@ int main(int argc, char *argv[])
 		line_number++;
 	}
 	free(line); /* Free the memory allocated for the line buffer */
+	free_stack(stack);
 	fclose(file); /* Close the file */
 	return (0);
 }
 
+
+/**
+ * free_stack - free the memory that's reserved for stck
+ * @head: atck structure
+ *
+ * Return: void
+ */
+
+void free_stack(stack_t *head)
+{
+	stack_t *next;
+
+	while (head != NULL)
+	{
+		next = head->next;
+		free(head);
+		head = next;
+	}
+}
 
 /**
  * check - perform checks
