@@ -23,8 +23,9 @@ int main(int argc, char *argv[])
 	instruction_t instructions[] = {
 		{"push", push}, {"add", add}, {"sub", sub},
 		{"pall", pall}, {"pop", pop}, {"nop", nop},
-		{"pop", pop}, {"swap", swap}, {"pint", pint},
-		{"mul", mul}, {NULL, NULL}
+		{"div", divide}, {"swap", swap}, {"pint", pint},
+		{"mul", mul}, {"pstr", pstr}, {"rotr", rotr},
+		{NULL, NULL}
 	};
 
 	/*Check if the user provided a file name*/
@@ -91,9 +92,10 @@ void execute(char *opcode, stack_t *stack, unsigned int line_number)
 {
 	int i;
 	instruction_t instructions[] = {
-		{"push", push},
-		{"pall", pall},
+		{"push", push}, {"pstr", pstr}, {"rotr", rotr},
+		{"pall", pall}, {"div", divide}, {"nop", nop},
 		{"pop", pop}, {"swap", swap}, {"pint", pint},
+		{"mul", mul}, {"sub", sub}, {"add", add},
 		{NULL, NULL}
 	};
 
