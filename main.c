@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 {
 	FILE *file = fopen(argv[1], "r");
 	stack_t *stack = NULL;
-	char *line = NULL, *opcode = NULL;
+	char *line = NULL, *opcode = NULL; /*strip_line = NULL;*/
 	size_t line_length = 0;
 	unsigned int line_number = 1;
 	int i;
@@ -28,12 +28,21 @@ int main(int argc, char *argv[])
 		{NULL, NULL}
 	};
 
+	/* printf("Before check ....\n"); */
 	/*Check if the user provided a file name*/
 	check(argc, argv, file);
 
+	/* printf("After check ...\n"); */
 	while (getline(&line, &line_length, file) != -1 && !feof(file))
 	{/* Read the bytecodes from the file*/
+		/*printf("In WHILE line is %s\n", line);*/
 		opcode = strtok(line, " \n");
+		if (opcode == NULL)
+		{
+			line_number++;
+			continue;
+		}
+		/*printf("opcode = %s\n", opcode);*/
 		for (i = 0; instructions[i].opcode != NULL; i++)
 		{
 			if (strcmp(opcode, instructions[i].opcode) == 0)
@@ -67,10 +76,11 @@ void check(int argc, char *argv[], FILE *file)
 {
 	if (argc != 2) /* Check if the user provided a file name */
 	{
-		fprintf(stderr, "Usage: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 
+	/* printf("There're al least 2 args\n"); */
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
