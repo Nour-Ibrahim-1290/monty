@@ -21,9 +21,9 @@ void divide(stack_t **stack, unsigned int line_number)
 
 	/* Get the value of the 2nd top element*/
 	sum = (*stack)->next->n;
-	if (sum == 0)
+	if ((*stack)->n == 0)
 	{
-		fprintf(stderr, "L%d: division by zero", line_number);
+		fprintf(stderr, "L%d: division by zero\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
