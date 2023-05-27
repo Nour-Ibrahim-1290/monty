@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 		{"pall", pall}, {"pop", pop}, {"nop", nop},
 		{"div", divide}, {"swap", swap}, {"pint", pint},
 		{"mul", mul}, {"pstr", pstr}, {"rotr", rotr},
-		{"mod", mod}, {NULL, NULL}
+		{"mod", mod}, {"pchar", pchar}, {NULL, NULL}
 	};
 
 	/* printf("Before check ....\n"); */
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 	{/* Read the bytecodes from the file*/
 		/*printf("In WHILE line is %s\n", line);*/
 		opcode = strtok(line, " \n");
-		if (opcode == NULL)
+		if (opcode == NULL || strncmp(opcode, "#", 1) == 0)
 		{
 			line_number++;
 			continue;
