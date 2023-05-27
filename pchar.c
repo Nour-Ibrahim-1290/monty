@@ -12,7 +12,8 @@ void pchar(stack_t **stack, unsigned int line_number)
 {
 	int value;
 
-	if ((*stack)->n == 0)
+	/*printf("inside pchar ....\n");*/
+	if ((*stack) == NULL)
 	{
 		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
@@ -20,11 +21,12 @@ void pchar(stack_t **stack, unsigned int line_number)
 
 	value = (*stack)->n;
 
+	/*printf("%d\n", value);*/
 	if (value < 0 || value > 127)
 	{
 		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
-	putchar(value);
+	fprintf(stderr, "%c\n", value);
 }
