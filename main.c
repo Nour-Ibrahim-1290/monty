@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 		{"pall", pall}, {"pop", pop}, {"nop", nop},
 		{"div", divide}, {"swap", swap}, {"pint", pint},
 		{"mul", mul}, {"pstr", pstr}, {"rotr", rotr},
-		{NULL, NULL}
+		{"mod", mod}, {NULL, NULL}
 	};
 
 	/* printf("Before check ....\n"); */
