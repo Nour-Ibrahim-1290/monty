@@ -19,7 +19,7 @@ void push(stack_t **stack, unsigned int line_number)
 	char *argument;
 	stack_t *new_node = malloc(sizeof(stack_t));
 
-	argument = strtok(NULL, " ");
+	argument = strtok(NULL, " \n");
 	/*printf("argument inside push = %s\n", argument);*/
 	if (argument == NULL)
 	{
@@ -27,6 +27,7 @@ void push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
+	/*printf("Argument = %s\n", argument);*/
 	value = atoi(argument);
 	/*
 	 * if (value < 0)
